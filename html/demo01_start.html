@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/metroStyle/metroStyle.css">
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-2.1.0.min.js"></script>
+
+    <script src="../js/jquery.ztree.core.js"></script>
+
+</head>
+<body>
+<div id="treeDiv" style="height: 100px;">
+    <input style="width: 100px;" @focus="showTree(true)" v-model="name"/>
+    <!--ul用于生成菜单树 注意默认class为ztree   -->
+    <ul id="treeDemo" class="ztree" v-show="isShow">
+
+    </ul>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el:'#treeDiv',
+        data:{
+            name:'',
+            isShow:true,
+            setting:{//ztree设置对象
+                data:{//ztree的data数据设置配置
+                    key:{
+                        title:"fullName",//将treeNode的fullName作为节点的title  ztree对象下面的节点对象就叫treeNode
+                    },
+                    /**
+                     * 非极简模式：
+                     * [
+                     * {"id":1,"name":"父节点1",children:[{{"id":3,"name":"父节点1的字节点1",children:[]},{},{}]}
+                     * {"id":2,"name":"父节点2",children:[{},{},{}]}
+                     * ]
+                     *
+                     * 极简模式:						 *
+                     *[
+                     * {"id":1,"name":"父节点1",pId:0},
+                     * {"id":2,"name":"父节点2",pId:0},
+                     * {"id":3,"name":"父节点1字节的1",pId:1},
+                     * {"id":4,"name":"父节点2字节的1",pId:2}
+                     * ]
+                     */
+                    simpleData:{
+                        enable:true//使用极简数组模式传入nodes给ztree
+                    }
+                }
+            },
+            nodes:[
+                {id:1,name:"父节点1",pId:0},
+                {id:2,name:"父节点2",pId:0},
+                {id:3,name:"父节点1字节的1",pId:1},
+                {id:4,name:"父节点2字节的1",pId:2},
+                {id:5,name:"父节点2字节的2",pId:2}
+            ]
+        },
+        methods:{
+            //初始化ztree对象
+            initTree:function(){
+                /**
+                 * $.fn.zTree.init(dom,setting,nodes):初始化zTree对象的方法
+                 * dom:存放zTree的dom节点对象
+                 * setting:ztree的设置
+                 * nodes:zTree显示的数据节点对象数组
+                 */
+                let treeObj = $.fn.zTree.init($("#treeDemo"),this.setting,this.nodes);
+                console.log(treeObj);
+            },
+            showTree:function(flag){
+
+            }
+        },
+        mounted:function(){//dom节点挂载  已经有节点对象了
+            this.initTree();
+        }
+
+    })
+
+</script>
+</html>

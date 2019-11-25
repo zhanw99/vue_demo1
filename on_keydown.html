@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="div"  style="width: 200px;height: 200px;border: 1px solid red">
+			<input type="text" v-on:keydown="fun2($event)">
+		</div>
+	</body>
+<script>
+	var vm= new  Vue({
+		el:"#div",
+		methods:{
+			//只能输入数字
+			fun2:function (e) {
+				if (!(e.keyCode>=48&&e.keyCode<=57)){
+					e.preventDefault();//阻止事件默认
+
+				}
+				console.log(e.keyCode)
+			}
+		}
+	});
+
+
+</script>
+</html>

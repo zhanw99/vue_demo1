@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js"></script>
+		<script src="js/axios.js"></script>
+	</head>
+	<body>
+
+	</body>
+<script>
+	//通过给定的ID来发送请求
+	axios.get('/user?ID=12345')
+			.then(function(response){
+				console.log(response);
+			})
+			.catch(function(err){
+				console.log(err);
+			});
+	//以上请求也可以通过这种方式来发送
+	// axios.get('/user',{
+	// 	params:{
+	// 		ID:12345
+	// 	}
+	// })
+	// 		.then(function(response){
+	// 			console.log(response);
+	// 		})
+	// 		.catch(function(err){
+	// 			console.log(err);
+	// 		});
+
+</script>
+</html>

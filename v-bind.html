@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="div"  style="width: 200px;height: 200px;border: 1px solid red">
+			 <font v-bind:color="color1">我是font1</font>
+			<hr>
+			 <font :color="color2">我是font1</font>
+			<hr>
+			<a v-bind:href="url">百度一下</a>
+			<hr>
+			<a v-bind= {href:"https://www.baidu.com?id="+id}>百度一下</a>
+			<hr>
+		</div>
+	</body>
+<script>
+	new Vue({
+		el:"#div",
+		data:{
+			color1:"red",
+			color2:"green",
+			id:10,
+			url:"https://www.baidu.com"
+		}
+
+	})
+
+</script>
+</html>

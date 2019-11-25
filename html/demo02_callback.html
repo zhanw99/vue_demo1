@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/metroStyle/metroStyle.css">
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-2.1.0.min.js"></script>
+
+    <script src="../js/jquery.ztree.core.js"></script>
+
+</head>
+<body>
+<div id="treeDiv" style="height: 100px;">
+    <input style="width: 100px;" @focus="showTree(true)" v-model="name"/>
+    <!--ul用于生成菜单树 注意默认class为ztree   -->
+    <ul id="treeDemo" class="ztree" v-show="isShow">
+        <!--点击某个节点元素获取其名字，放入input中-->
+
+    </ul>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el:"#treeDiv",
+        //通过回调函数方式来实现
+        data:function(){
+            return {
+                name:"",
+                isShow:true,
+                setting:{
+                    data: {
+                        key:{
+                            title:"fullName"
+                        },
+                        simpleData: {
+                            enable:true
+                        }
+                    },
+                    callback:{
+                        beforeClick:this.beforeClick,
+                        onClick:this.onClick
+                    }
+                },nodes:[
+                    {id:1,name:"父节点1",pId:0},
+                    {id:2,name:"父节点2",pId:0},
+                    {id:3,name:"父节点1的子节点1",pId:1},
+                    {id:4,name:"父节点1的子节点2",pId:1},
+                    {id:5,name:"父节点1的子节点2",pId:2},
+                    {id:6,name:"父节点1的子节点2",pId:2},
+                    {id:7,name:"父节点1的子节点1再子节点1",pId:3},
+                    {id:8,name:"父节点1的子节点1再子节点2",pId:3},
+                ],
+            }
+
+        },
+        methods:{
+            initTree:function () {
+                $.fn.zTree.init($("#treeDemo"),this.setting,this.nodes)
+            },
+            showTree(flge){
+
+            },
+            beforeClick: function (event,treeId,treeNode) {//event:初始化对象，treeId树节点id    treeNode：当前触发时间的节点
+
+            },
+            onClick: function (event,treeId,treeNode) {
+                console.log(treeId);
+                console.log(treeNode);
+                this.name = treeNode.name;
+            }
+
+        },
+        mounted:function () {//dom节点挂载  已经有节点对象了
+        this.initTree()
+        }
+
+    })
+
+
+</script>
+</html>

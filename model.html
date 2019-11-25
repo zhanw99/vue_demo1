@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>model</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="div" style="width: 200px;height: 200px;border: 1px solid red">
+			username:<input type="text" v-model="user.username">
+			<hr>
+			address:<input type="text" v-model="user.address">
+			<hr>
+			<button @click="fun1">弹出Vue中的username</button>
+			<button @click="fun1">弹出Vue中的address</button>
+		</div>
+	</body>
+<script>
+	new Vue({
+		el:"#div",
+		data:{
+			user:{
+				username:'张三',
+				address:'广州'
+			}
+		},
+		methods:{
+			fun1:function () {
+				alert(this.user.username);
+			},
+			fun2:function () {
+				alert(this.user.address);
+			}
+		}
+	});
+
+</script>
+</html>
